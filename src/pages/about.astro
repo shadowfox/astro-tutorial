@@ -1,5 +1,18 @@
 ---
+import '../styles/global.css';
 
+const pageTitle = "About";
+const pageDescription = "This is the about page";
+
+const identity = {
+  firstName: "M",
+  occupation: "Web Developer",
+  hobbies: ["photography", "electronics"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "PHP", "C#"];
+
+const skillColor = "navy";
 ---
 
 <html lang="en">
@@ -8,7 +21,14 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>About</title>
+		<title>{pageTitle}</title>
+        <meta name="description" content={pageDescription}>
+        <style define:vars={{skillColor}}>
+            .skill {
+              color: var(--skillColor);
+              font-weight: bold;
+            }
+        </style>
 	</head>
 	<body>
         <a href="/">Home</a>
@@ -21,6 +41,19 @@
         <p>I am working through Astro's introductory tutorial. This is the second page on my website, and it's the first one I built myself!</p>
       
         <p>This site will update as I complete more of the tutorial, so keep checking back and see how my journey is going!</p>
+
+        <p>Here are a few facts about me:</p>
+        <ul>
+            <li>My name is {identity.firstName}</li>
+            <li>I work as a {identity.occupation}</li>
+            {identity.hobbies.length >= 2 && 
+                <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+            }
+        </ul>
+        <p>My skillset includes:</p>
+        <ul>
+            {skills.map(skill => <li class="skill">{skill}</li>)}
+        </ul>
       </body>
 	</body>
 </html>
